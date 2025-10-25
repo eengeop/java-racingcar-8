@@ -12,22 +12,22 @@ public class Validator {
     private static final String VALIDATE_TRY_COUNT_REGX = "^\\d$";
 
 
-    public UserInputDTO validateName(UserInputDTO userInputDTO){
+    public String validateName(UserInputDTO userInputDTO){
         List<String> carNames = Arrays.stream(userInputDTO.getCarNames().split(",")).toList();
         if(carNames.stream()
                 .anyMatch(carName-> carName.length() > MAX_CAR_NAME_LENGTH)){
             throw new IllformedLocaleException("자동차 이름은 5글자를 넘길 수 없습니다.");
         }
-        return userInputDTO;
+        return userInputDTO.getCarNames();
     }
 
-    public UserInputDTO validateCount(UserInputDTO userInputDTO){
+    public String validateCount(UserInputDTO userInputDTO){
         if(userInputDTO.getInputTryCount() == null || !userInputDTO.getInputTryCount().matches(VALIDATE_TRY_COUNT_REGX)){
                 throw new IllegalArgumentException("10회 미만의 자연수만 시도할 수 있습니다.");
         }
         if(Integer.parseInt(userInputDTO.getInputTryCount()) == MIN_TRY_COUNT){
                 throw new IllegalArgumentException("경기는 한 번 이상부터 진행 가능합니다.");
         }
-        return userInputDTO;
+        return userInputDTO.getInputTryCount();
     }
 }
