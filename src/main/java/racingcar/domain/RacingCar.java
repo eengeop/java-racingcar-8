@@ -4,7 +4,7 @@ public class RacingCar {
 
     private static final int VALUE_CONDITION_FOR_MOVE = 4;
 
-    private String carName;
+    private final String carName;
     private int dashCount;
 
     public RacingCar(String carName) {
